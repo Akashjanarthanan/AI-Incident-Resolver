@@ -1,0 +1,50 @@
+[
+    {
+        "id": "G001",
+        "claim": "Check the Oracle listener status using lsnrctl status.",
+        "evidence": "Run lsnrctl status to verify whether the Oracle listener is running.",
+        "expected": true
+    },
+    {
+        "id": "G002",
+        "claim": "The default Oracle listener port is commonly 1521.",
+        "evidence": "The default Oracle listener port is commonly 1521.",
+        "expected": true
+    },
+    {
+        "id": "G003",
+        "claim": "Firewall configuration may need to be investigated when the listener port is unavailable.",
+        "evidence": "If the host is reachable but the listener port is unavailable, investigate listener status or firewall configuration.",
+        "expected": true
+    },
+    {
+        "id": "G004",
+        "claim": "If the database host cannot be reached, investigate network connectivity.",
+        "evidence": "If the database host cannot be reached: Investigate network connectivity.",
+        "expected": true
+    },
+    {
+        "id": "G005",
+        "claim": "Restart the entire Oracle database server immediately.",
+        "evidence": "Run lsnrctl status to verify whether the Oracle listener is running.",
+        "expected": false
+    },
+    {
+        "id": "G006",
+        "claim": "Disable the firewall to solve every Oracle connectivity problem.",
+        "evidence": "Verify that firewall rules are not blocking communication between the application server and database server.",
+        "expected": false
+    },
+    {
+        "id": "G007",
+        "claim": "The Oracle listener always uses port 3306.",
+        "evidence": "The default Oracle listener port is commonly 1521.",
+        "expected": false
+    },
+    {
+        "id": "G008",
+        "claim": "Kubernetes CrashLoopBackOff can be resolved using lsnrctl start.",
+        "evidence": "Run lsnrctl start to start the Oracle listener.",
+        "expected": false
+    }
+]

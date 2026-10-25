@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AI Incident Resolver
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px
+                rgba(0, 0, 0, 0.08);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #resolveButton {
+            background: #222;
+            color: white;
+        }
+
+        #clearButton {
+            margin-left: 10px;
+            background: #ddd;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-top: 25px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #f7f7f7;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .step {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #f7f7f7;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background: #fff4d6;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        .error {
+            color: #b00020;
+        }
+
+        .loading {
+            color: #555;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>
+            AI Incident Resolver
+        </h1>
+
+        <p>
+            RAG-based IT Incident Resolution Copilot
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            Report an Incident
+        </h2>
+
+        <textarea
+            id="incidentInput"
+            placeholder="Hi! How can i help you"
+        ></textarea>
+
+        <br>
+
+        <button
+            id="resolveButton"
+            onclick="resolveIncident()"
+        >
+            Resolve Incident
+        </button>
+
+        <button
+            id="clearButton"
+            onclick="clearConversation()"
+        >
+            Clear Conversation
+        </button>
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+    </div>
+
+
+    <div
+        id="responseCard"
+        class="card"
+        style="display: none;"
+    >
+
+        <h2>
+            AI Response
+        </h2>
+
+
+        <div class="section">
+
+            <h3>
+                Incident
+            </h3>
+
+            <div
+                id="incident"
+                class="info-box"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Likely Cause
+            </h3>
+
+            <div
+                id="likelyCause"
+                class="info-box"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Confidence
+            </h3>
+
+            <div
+                id="confidence"
+                class="info-box"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Evidence
+            </h3>
+
+            <div
+                id="evidence"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Recommended Investigation
+            </h3>
+
+            <div
+                id="investigation"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Recommended Resolution
+            </h3>
+
+            <div
+                id="resolution"
+            ></div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Warnings
+            </h3>
+
+            <div
+                id="warnings"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SESSION_KEY =
+    "ai_incident_session_id";
+
+
+function getSessionId() {
+
+    let sessionId =
+        localStorage.getItem(
+            SESSION_KEY
+        );
+
+    if (!sessionId) {
+
+        sessionId =
+            "web-" +
+            crypto.randomUUID();
+
+        localStorage.setItem(
+            SESSION_KEY,
+            sessionId
+        );
+    }
+
+    return sessionId;
+}
+
+
+function escapeHtml(text) {
+
+    if (!text) {
+        return "";
+    }
+
+    return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+function showList(
+    containerId,
+    items
+) {
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+    container.innerHTML = "";
+
+    if (!items || items.length === 0) {
+
+        container.innerHTML =
+            "<div class='info-box'>No information available.</div>";
+
+        return;
+    }
+
+    items.forEach(
+        item => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className = "step";
+
+            if (typeof item === "string") {
+
+                div.textContent =
+                    item;
+
+            } else {
+
+                div.textContent =
+                    item.statement ||
+                    item.step ||
+                    item.action ||
+                    JSON.stringify(item);
+            }
+
+            container.appendChild(
+                div
+            );
+        }
+    );
+}
+
+
+async function resolveIncident() {
+
+    const input =
+        document.getElementById(
+            "incidentInput"
+        );
+
+    const button =
+        document.getElementById(
+            "resolveButton"
+        );
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+    const responseCard =
+        document.getElementById(
+            "responseCard"
+        );
+
+
+    const query =
+        input.value.trim();
+
+
+    if (!query) {
+
+        status.textContent =
+            "Please enter an incident.";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    status.className =
+        "status loading";
+
+    status.textContent =
+        "Analyzing incident...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/resolve",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        query: query,
+                        session_id:
+                            getSessionId()
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.detail ||
+                "API request failed."
+            );
+        }
+
+
+        if (
+            data.status ===
+            "insufficient_evidence"
+        ) {
+
+            status.className =
+                "status error";
+
+            status.textContent =
+                "Insufficient evidence.";
+
+            responseCard.style.display =
+                "none";
+
+            return;
+        }
+
+
+        const answer =
+            data.answer || {};
+
+        const incident =
+            data.incident || {};
+
+
+        document.getElementById(
+            "incident"
+        ).textContent =
+            JSON.stringify(
+                incident,
+                null,
+                2
+            );
+
+
+        document.getElementById(
+            "likelyCause"
+        ).textContent =
+            answer.likely_cause ||
+            "Not available.";
+
+
+        document.getElementById(
+            "confidence"
+        ).textContent =
+            answer.confidence ||
+            "Not available.";
+
+
+        showList(
+            "evidence",
+            answer.evidence
+        );
+
+
+        showList(
+            "investigation",
+            answer.investigation_steps
+        );
+
+
+        showList(
+            "resolution",
+            answer.recommended_resolution
+        );
+
+
+        showList(
+            "warnings",
+            answer.warnings
+        );
+
+
+        responseCard.style.display =
+            "block";
+
+
+        status.className =
+            "status";
+
+        status.textContent =
+            "Incident analyzed successfully.";
+
+    }
+
+    catch (error) {
+
+        status.className =
+            "status error";
+
+        status.textContent =
+            "Error: " +
+            error.message;
+    }
+
+    finally {
+
+        button.disabled =
+            false;
+    }
+}
+
+
+function clearConversation() {
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+    document.getElementById(
+        "incidentInput"
+    ).value = "";
+
+    document.getElementById(
+        "responseCard"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "status"
+    ).textContent =
+        "New conversation started.";
+}
+
+</script>
+
+</body>
+
+</html>

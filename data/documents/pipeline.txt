@@ -1,0 +1,15 @@
+oracle_listener.md
+       ↓
+text
+       ↓
+chunks
+       ↓
+embeddings
+       ↓
+vector database
+       ↓
+retrieval
+       ↓
+LLM
+       ↓
+incident resolution

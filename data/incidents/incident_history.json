@@ -1,0 +1,1586 @@
+[
+    {
+        "incident_id": 1,
+        "timestamp": "2026-09-30T21:10:45.270180",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "production",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle.",
+            "likely_cause": "Oracle listener connectivity issue.",
+            "confidence": "HIGH"
+        }
+    },
+    {
+        "incident_id": 2,
+        "timestamp": "2026-09-30T21:10:58.120455",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "production",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle.",
+            "likely_cause": "Oracle listener connectivity issue.",
+            "confidence": "HIGH"
+        }
+    },
+    {
+        "incident_id": 3,
+        "timestamp": "2026-09-30T21:43:37.584236",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment",
+                "Error ORA-12541"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 4,
+        "timestamp": "2026-09-30T21:50:54.183139",
+        "query": "The listener is already running.",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "unknown",
+            "technology": "unknown",
+            "symptoms": [
+                "The listener is already running"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 5,
+        "timestamp": "2026-09-30T21:53:45.346728",
+        "query": "What should I check next?",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "unknown",
+            "technology": "unknown",
+            "symptoms": [
+                "application still cannot connect to Oracle after verifying listener is running"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "MEDIUM",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 6,
+        "timestamp": "2026-09-30T23:00:53.747830",
+        "query": "The listener is already running.",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "unknown",
+            "technology": "unknown",
+            "symptoms": [
+                "Oracle listener is already running"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "MEDIUM",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 7,
+        "timestamp": "2026-10-01T22:18:14.843475",
+        "query": "Application cannot connect to Oracle. ORA-12541",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle. ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 8,
+        "timestamp": "2026-10-01T22:24:32.555715",
+        "query": "oracle is not connecting after deployment",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "oracle is not connecting after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 9,
+        "timestamp": "2026-10-07T03:06:06.421357",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 10,
+        "timestamp": "2026-10-07T14:34:30.565422",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 11,
+        "timestamp": "2026-10-07T14:47:22.435404",
+        "query": "The listener is already running.",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "unknown",
+            "technology": "unknown",
+            "symptoms": [
+                "The listener is already running"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "The listener is already running",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "MEDIUM",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 12,
+        "timestamp": "2026-10-12T22:06:28.667267",
+        "query": "Application cannot connect to Oracle after deployment.\nError ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 13,
+        "timestamp": "2026-10-19T14:21:32.897624",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 14,
+        "timestamp": "2026-10-19T22:43:54.542998",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment",
+                "Error ORA-12541"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 15,
+        "timestamp": "2026-10-19T22:49:46.065190",
+        "query": "The Oracle database was restarted, but the application still cannot connect.",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "the application still cannot connect after the Oracle database was restarted"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 16,
+        "timestamp": "2026-10-19T23:30:22.838863",
+        "query": "Application cannot connect to Oracle after deployment. Error ORA-12541.",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "application cannot connect to Oracle after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Application cannot connect to Oracle after deployment. Error ORA-12541",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 17,
+        "timestamp": "2026-10-19T23:36:21.377317",
+        "query": "The API returns HTTP 500 after the latest release",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "application",
+            "technology": "api",
+            "symptoms": [
+                "API returns HTTP 500 after the latest release"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "The listener is already running",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 18,
+        "timestamp": "2026-10-20T21:33:29.973979",
+        "query": "Oracle connection failed with ORA-12541 after deployment",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "Oracle connection failed with ORA-12541 after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 19,
+        "timestamp": "2026-10-22T21:52:22.720782",
+        "query": "Oracle connection failed with ORA-12541 after deployment",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "Oracle connection failed with ORA-12541 after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 20,
+        "timestamp": "2026-10-22T22:19:47.240867",
+        "query": "The Oracle database was restarted, but the application still cannot connect.",
+        "incident": {
+            "error_code": "unknown",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "The Oracle database was restarted, but the application still cannot connect"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "The Oracle database was restarted, but the application still cannot connect.",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 21,
+        "timestamp": "2026-10-23T15:54:01.349966",
+        "query": "Oracle connection failed with ORA-12541 after deployment",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "Oracle connection failed with ORA-12541 after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 22,
+        "timestamp": "2026-10-23T16:00:19.442719",
+        "query": "Oracle connection failed with ORA-12541 after deployment",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "Oracle connection failed with ORA-12541 after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 23,
+        "timestamp": "2026-10-23T16:05:20.931284",
+        "query": "Oracle connection failed with ORA-12541 after deployment",
+        "incident": {
+            "error_code": "ORA-12541",
+            "application": "unknown",
+            "environment": "unknown",
+            "category": "database",
+            "technology": "oracle",
+            "symptoms": [
+                "Oracle connection failed with ORA-12541 after deployment"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "LOW",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the database host cannot be reached: Investigate network connectivity.",
+                    "source_id": 1
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    },
+    {
+        "incident_id": 24,
+        "timestamp": "2026-10-23T16:19:54.845585",
+        "query": "network connectivity from the application server is good",
+        "incident": {
+            "error_code": "unknown",
+            "application": "application server",
+            "environment": "unknown",
+            "category": "unknown",
+            "technology": "unknown",
+            "symptoms": [
+                "network connectivity from the application server is good"
+            ],
+            "intent": "troubleshooting"
+        },
+        "answer": {
+            "incident_summary": "Oracle connection failed with ORA-12541 after deployment",
+            "likely_cause": "ORA-12541: TNS:no listener",
+            "confidence": "MEDIUM",
+            "evidence": [
+                {
+                    "statement": "A common error associated with this situation is: ORA-12541: TNS:no listener",
+                    "source_id": 0
+                },
+                {
+                    "statement": "If the listener is available but the application still cannot connect: Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "investigation_steps": [
+                {
+                    "step": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "step": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "step": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "recommended_resolution": [
+                {
+                    "action": "Verify the Oracle listener is running.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Test network connectivity from the application server.",
+                    "source_id": 1
+                },
+                {
+                    "action": "Verify the listener port is available.",
+                    "source_id": 2
+                },
+                {
+                    "action": "Investigate application connection configuration and credentials.",
+                    "source_id": 2
+                }
+            ],
+            "warnings": [
+                "Insufficient evidence to determine the root cause of the issue."
+            ]
+        }
+    }
+]

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fc">
+  <title>AI Incident Resolver</title>
+  <style>
+    :root {
+      --page: #f5f7fc;
+      --surface: #ffffff;
+      --surface-soft: #f8faff;
+      --ink: #172033;
+      --muted: #68738a;
+      --line: #e3e8f2;
+      --brand: #405be8;
+      --brand-dark: #3048c7;
+      --brand-soft: #edf0ff;
+      --success: #16794b;
+      --success-soft: #eaf8f0;
+      --warning: #8a5a00;
+      --warning-soft: #fff5dc;
+      --danger: #b42336;
+      --danger-soft: #fff0f1;
+      --shadow: 0 16px 42px rgba(26, 42, 83, .07);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at top left, #eef1ff 0, transparent 34%), var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    button, textarea { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    .app-shell { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 56px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 42px; }
+    .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .brand-mark { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 15px; color: #fff; background: linear-gradient(145deg, #6378ff, #3549c8); box-shadow: 0 8px 18px rgba(64, 91, 232, .25); }
+    .brand-mark svg { width: 25px; height: 25px; }
+    .brand-name { margin: 0; font-size: 17px; font-weight: 760; letter-spacing: -.35px; }
+    .brand-subtitle { margin: 1px 0 0; color: var(--muted); font-size: 12px; }
+    .system-status { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #dcefe4; border-radius: 999px; background: rgba(255,255,255,.8); color: var(--success); font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #25a56a; box-shadow: 0 0 0 3px #dff5e8; }
+    .hero { max-width: 760px; margin: 0 auto 30px; text-align: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid #dfe4ff; border-radius: 999px; background: rgba(255,255,255,.72); color: var(--brand-dark); font-size: 12px; font-weight: 750; letter-spacing: .02em; }
+    .eyebrow svg { width: 14px; height: 14px; }
+    .hero h1 { margin: 17px 0 12px; font-size: clamp(32px, 5vw, 48px); line-height: 1.1; letter-spacing: -1.8px; font-weight: 780; }
+    .hero h1 span { color: var(--brand); }
+    .hero p { max-width: 600px; margin: 0 auto; color: var(--muted); font-size: 16px; }
+    .panel { border: 1px solid rgba(221, 227, 240, .9); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    .input-panel { max-width: 850px; margin: 0 auto 26px; padding: 25px; }
+    .panel-heading { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 17px; }
+    .heading-icon { display: grid; place-items: center; width: 39px; height: 39px; flex: 0 0 auto; border-radius: 12px; background: var(--brand-soft); color: var(--brand); }
+    .heading-icon svg { width: 20px; height: 20px; }
+    .panel-heading h2 { margin: 0; font-size: 17px; letter-spacing: -.25px; }
+    .panel-heading p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+    .input-wrap { position: relative; }
+    textarea { display: block; width: 100%; min-height: 145px; resize: vertical; padding: 17px 18px 36px; border: 1px solid #dce2ee; border-radius: 14px; outline: none; background: #fbfcff; color: var(--ink); font-size: 15px; line-height: 1.65; transition: border-color .18s, box-shadow .18s, background .18s; }
+    textarea::placeholder { color: #8a94a8; }
+    textarea:focus { border-color: #8797ff; background: #fff; box-shadow: 0 0 0 4px rgba(64,91,232,.10); }
+    .input-hint { position: absolute; right: 13px; bottom: 10px; color: #8a94a8; font-size: 11px; pointer-events: none; }
+    .examples { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 13px; }
+    .examples-label { margin-right: 2px; color: var(--muted); font-size: 12px; }
+    .example-chip { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: #4c5870; font-size: 12px; cursor: pointer; transition: all .18s; }
+    .example-chip:hover { border-color: #b9c4ff; background: var(--brand-soft); color: var(--brand-dark); }
+    .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 19px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 11px 17px; border: 1px solid transparent; border-radius: 12px; font-size: 13px; font-weight: 750; cursor: pointer; transition: transform .15s, background .15s, box-shadow .15s; }
+    .btn:active:not(:disabled) { transform: translateY(1px); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn svg { width: 17px; height: 17px; }
+    .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 7px 15px rgba(64,91,232,.18); }
+    .btn-primary:hover:not(:disabled) { background: var(--brand-dark); box-shadow: 0 9px 20px rgba(64,91,232,.24); }
+    .btn-secondary { border-color: var(--line); background: #fff; color: #4b566c; }
+    .btn-secondary:hover { background: #f7f8fc; }
+    .privacy-note { margin-left: auto; color: #8992a4; font-size: 11px; }
+    .status-message { display: none; margin-top: 15px; padding: 11px 13px; border-radius: 10px; font-size: 13px; }
+    .status-message.visible { display: block; }
+    .status-message.loading { background: #eef2ff; color: #3448b5; }
+    .status-message.success { background: var(--success-soft); color: var(--success); }
+    .status-message.error { background: var(--danger-soft); color: var(--danger); }
+    .status-message.warning { background: var(--warning-soft); color: var(--warning); }
+    .response-panel { display: none; margin-top: 28px; overflow: hidden; }
+    .response-panel.visible { display: block; animation: reveal .25s ease-out; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    .response-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 21px 24px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, #fbfcff, #fff); }
+    .response-title { display: flex; align-items: center; gap: 12px; }
+    .response-title h2 { margin: 0; font-size: 18px; letter-spacing: -.4px; }
+    .response-title p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .response-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+    .small-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #566178; font-size: 12px; font-weight: 650; cursor: pointer; }
+    .small-btn:hover { background: #f6f8ff; border-color: #c9d0ff; }
+    .small-btn svg { width: 14px; height: 14px; }
+    .response-body { padding: 24px; }
+    .summary-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(190px, .7fr); gap: 15px; }
+    .result-card { min-width: 0; padding: 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .result-card.soft { background: var(--surface-soft); }
+    .result-label { display: flex; align-items: center; gap: 8px; margin: 0 0 11px; color: #536079; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .result-label svg { width: 16px; height: 16px; color: var(--brand); }
+    .result-value { margin: 0; color: #29344b; font-size: 14px; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .confidence-value { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: var(--brand-soft); color: var(--brand-dark); font-size: 12px; font-weight: 800; }
+    .result-section { margin-top: 17px; padding: 20px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .result-section h3 { display: flex; align-items: center; gap: 9px; margin: 0 0 14px; font-size: 15px; letter-spacing: -.2px; }
+    .result-section h3 svg { width: 18px; height: 18px; color: var(--brand); }
+    .list-content { display: grid; gap: 9px; }
+    .step-item { display: flex; align-items: flex-start; gap: 11px; padding: 12px 13px; border: 1px solid #e9edf5; border-radius: 11px; background: #fbfcff; color: #3e4a61; font-size: 13px; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .step-number { display: grid; place-items: center; width: 23px; height: 23px; flex: 0 0 auto; border-radius: 7px; background: var(--brand-soft); color: var(--brand-dark); font-size: 11px; font-weight: 800; }
+    .empty-item { padding: 12px 13px; border-radius: 10px; background: #f8f9fc; color: #7a8498; font-size: 13px; }
+    .warning-item { border-color: #f2dfac; background: #fffaf0; }
+    .warning-item .step-number { background: #ffedbd; color: #865700; }
+    .raw-details { margin-top: 17px; }
+    .raw-details summary { color: var(--muted); font-size: 12px; cursor: pointer; }
+    .raw-details pre { overflow: auto; max-height: 260px; padding: 14px; border-radius: 10px; background: #f5f7fb; color: #3d4960; font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .footer { margin-top: 27px; text-align: center; color: #8b94a6; font-size: 11px; }
+    .footer strong { color: #66718a; font-weight: 700; }
+
+    .history-panel { max-width: 850px; margin: 0 auto 26px; padding: 22px 24px; }
+    .history-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+    .history-heading h2 { margin:0; font-size:17px; }
+    .history-heading p { margin:3px 0 0; color:var(--muted); font-size:13px; }
+    .history-list { display:grid; gap:10px; }
+    .history-item { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:13px 14px; border:1px solid var(--line); border-radius:12px; background:#fbfcff; }
+    .history-main { min-width:0; }
+    .history-id { color:var(--brand-dark); font-size:11px; font-weight:800; letter-spacing:.04em; }
+    .history-query { margin:3px 0 5px; color:var(--ink); font-size:13px; font-weight:650; overflow-wrap:anywhere; }
+    .history-meta { color:var(--muted); font-size:11px; }
+    .history-view { flex:0 0 auto; padding:8px 11px; border:1px solid #dce2ee; border-radius:9px; background:white; color:var(--brand-dark); font-size:12px; font-weight:750; cursor:pointer; }
+    .history-view:hover { background:var(--brand-soft); }
+    .history-empty { padding:16px; border:1px dashed var(--line); border-radius:12px; color:var(--muted); font-size:13px; text-align:center; }
+    @media (max-width: 520px) { .history-panel { padding:17px; } .history-item { align-items:flex-start; flex-direction:column; } .history-view { width:100%; } }
+
+    @media (max-width: 700px) {
+      .app-shell { width: min(100% - 24px, 1120px); padding-top: 18px; }
+      .topbar { margin-bottom: 31px; }
+      .brand-subtitle { max-width: 200px; }
+      .system-status { padding: 7px 9px; font-size: 11px; }
+      .hero h1 { letter-spacing: -1.1px; }
+      .hero p { font-size: 14px; }
+      .input-panel { padding: 17px; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .response-header { align-items: flex-start; flex-direction: column; padding: 18px; }
+      .response-body { padding: 14px; }
+      .result-section { padding: 15px; }
+      .privacy-note { width: 100%; margin-left: 0; }
+      .actions .btn { flex: 1 1 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 14.3 8.7 20 11l-5.7 2.3L12 19l-2.3-5.7L4 11l5.7-2.3L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg>
+        </div>
+        <div>
+          <p class="brand-name">AI Incident Resolver</p>
+          <p class="brand-subtitle">RAG-powered IT support copilot</p>
+        </div>
+      </div>
+      <div class="system-status"><span class="status-dot"></span> Assistant interface</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 7.4 7.5 9.5 4.3-2.1 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        TECHNICAL TROUBLESHOOTING, SIMPLIFIED
+      </div>
+      <h1>Resolve incidents with <span>clarity.</span></h1>
+      <p>Describe the issue you're facing. The assistant will analyze the incident and present relevant evidence, investigation steps and recommended actions.</p>
+    </section>
+
+    <section class="panel input-panel" aria-labelledby="reportHeading">
+      <div class="panel-heading">
+        <div class="heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l2.5 1.5"/><circle cx="12" cy="12" r="9"/><path d="M8 3.8 6.5 2.5M16 3.8l1.5-1.3"/></svg></div>
+        <div>
+          <h2 id="reportHeading">What can I help you troubleshoot?</h2>
+          <p>Include the error code, application, environment and what changed recently, if known.</p>
+        </div>
+      </div>
+      <div class="input-wrap">
+        <textarea id="incidentInput" aria-label="Describe your incident" placeholder="Hi! Enter your query…" maxlength="10000"></textarea>
+        <span class="input-hint" id="charCount">0 / 10000</span>
+      </div>
+      <div class="examples" aria-label="Example incident queries">
+        <span class="examples-label">Try an example:</span>
+        <button class="example-chip" type="button" data-query="Oracle connection failed with ORA-12541 after deployment">Oracle ORA-12541</button>
+        <button class="example-chip" type="button" data-query="The application is timing out when calling an API">Application timeout</button>
+        <button class="example-chip" type="button" data-query="The API returns HTTP 500 after the latest release">API 500 error</button>
+      </div>
+      <div class="actions">
+        <button id="resolveButton" class="btn btn-primary" type="button" onclick="resolveIncident()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg>
+          Analyze incident
+        </button>
+        <button id="clearButton" class="btn btn-secondary" type="button" onclick="clearConversation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2m-11 0 1 14h12l1-14M10 10v6m4-6v6"/></svg>
+          New conversation
+        </button>
+        <span class="privacy-note">Review recommendations before taking action.</span>
+      </div>
+      <div id="status" class="status-message" role="status" aria-live="polite"></div>
+    </section>
+
+
+    <section class="panel history-panel" aria-labelledby="historyHeading">
+      <div class="history-heading">
+        <div>
+          <h2 id="historyHeading">Recent incidents</h2>
+          <p>Your latest successfully resolved incidents.</p>
+        </div>
+        <button class="small-btn" type="button" onclick="loadRecentIncidents()">↻ Refresh</button>
+      </div>
+      <div id="historyList" class="history-list" aria-live="polite">
+        <div class="history-empty">Loading recent incidents…</div>
+      </div>
+    </section>
+
+    <section id="responseCard" class="panel response-panel" aria-labelledby="responseHeading">
+      <div class="response-header">
+        <div class="response-title">
+          <div class="heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 14.3 8.7 20 11l-5.7 2.3L12 19l-2.3-5.7L4 11l5.7-2.3L12 3Z"/></svg></div>
+          <div><h2 id="responseHeading">Incident analysis</h2><p>Review the findings and supporting evidence below.</p></div>
+        </div>
+        <div class="response-tools">
+          <button type="button" class="small-btn" onclick="copyResponse()" title="Copy the analysis">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg> Copy results
+          </button>
+        </div>
+      </div>
+      <div class="response-body">
+        <div class="summary-grid">
+          <article class="result-card soft">
+            <h3 class="result-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 10h16M4 15h10M4 20h7"/></svg> Incident summary</h3>
+            <p id="incident" class="result-value">No analysis yet.</p>
+          </article>
+          <article class="result-card">
+            <h3 class="result-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V19h8v-3.3A7 7 0 0 0 12 3Z"/><path d="M9 22h6M9 16h6"/></svg> Confidence</h3>
+            <p id="confidence" class="result-value"><span class="confidence-value">Not available</span></p>
+          </article>
+        </div>
+        <article class="result-card" style="margin-top:15px">
+          <h3 class="result-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg> Likely cause</h3>
+          <p id="likelyCause" class="result-value">Not available.</p>
+        </article>
+        <section class="result-section">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg> Evidence and sources</h3>
+          <div id="evidence" class="list-content"></div>
+        </section>
+        <section class="result-section">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> Recommended investigation</h3>
+          <div id="investigation" class="list-content"></div>
+        </section>
+        <section class="result-section">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="5"/></svg> Recommended resolution</h3>
+          <div id="resolution" class="list-content"></div>
+        </section>
+        <section class="result-section">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m10.3 3.9-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.1l-8-14a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 4h.01"/></svg> Warnings and cautions</h3>
+          <div id="warnings" class="list-content"></div>
+        </section>
+        <details class="raw-details">
+          <summary>View structured incident details</summary>
+          <pre id="incidentDetails"></pre>
+        </details>
+      </div>
+    </section>
+    <footer class="footer"><strong>AI Incident Resolver</strong> · AI-generated guidance should be validated against approved procedures before changes are made.</footer>
+  </main>
+
+  <script>
+    const SESSION_KEY = "ai_incident_session_id";
+    let latestResponseText = "";
+
+    function getSessionId() {
+      let sessionId = localStorage.getItem(SESSION_KEY);
+      if (!sessionId) {
+        sessionId = "web-" + crypto.randomUUID();
+        localStorage.setItem(SESSION_KEY, sessionId);
+      }
+      return sessionId;
+    }
+
+    function setStatus(message, type = "") {
+      const status = document.getElementById("status");
+      status.textContent = message;
+      status.className = "status-message visible" + (type ? " " + type : "");
+    }
+
+    function hideStatus() {
+      const status = document.getElementById("status");
+      status.textContent = "";
+      status.className = "status-message";
+    }
+
+    function displayText(value) {
+      if (value === null || value === undefined || value === "") return "Not available.";
+      if (typeof value === "string") return value;
+      return JSON.stringify(value, null, 2);
+    }
+
+    function showList(containerId, items, isWarning = false) {
+      const container = document.getElementById(containerId);
+      container.replaceChildren();
+      if (!Array.isArray(items) || items.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-item";
+        empty.textContent = "No information available.";
+        container.appendChild(empty);
+        return;
+      }
+      items.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "step-item" + (isWarning ? " warning-item" : "");
+        const number = document.createElement("span");
+        number.className = "step-number";
+        number.textContent = isWarning ? "!" : String(index + 1);
+        const text = document.createElement("span");
+        if (typeof item === "string") {
+          text.textContent = item;
+        } else if (item && typeof item === "object") {
+          text.textContent = item.statement || item.step || item.action || item.title || JSON.stringify(item);
+        } else {
+          text.textContent = String(item);
+        }
+        div.append(number, text);
+        container.appendChild(div);
+      });
+    }
+
+    function getAnswerText(data) {
+      const answer = data.answer || {};
+      const incident = data.incident || {};
+      const sections = [
+        ["Incident", typeof incident === "string" ? incident : JSON.stringify(incident, null, 2)],
+        ["Likely cause", answer.likely_cause],
+        ["Confidence", answer.confidence],
+        ["Evidence", answer.evidence],
+        ["Investigation", answer.investigation_steps],
+        ["Recommended resolution", answer.recommended_resolution],
+        ["Warnings", answer.warnings]
+      ];
+      return sections.map(([label, value]) => label + ":\n" + displayText(value)).join("\n\n");
+    }
+
+    async function resolveIncident() {
+      const input = document.getElementById("incidentInput");
+      const button = document.getElementById("resolveButton");
+      const responseCard = document.getElementById("responseCard");
+      const query = input.value.trim();
+      if (!query) {
+        setStatus("Please enter an incident description before analyzing.", "error");
+        input.focus();
+        return;
+      }
+      button.disabled = true;
+      button.innerHTML = '<span class="loading-spinner" aria-hidden="true">⏳</span> Analyzing incident…';
+      setStatus("Analyzing your incident and retrieving relevant evidence…", "loading");
+      try {
+        const response = await fetch("/resolve", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: query, session_id: getSessionId() })
+        });
+        let data;
+        try { data = await response.json(); }
+        catch { throw new Error("The server returned an unreadable response. Check that the API is running."); }
+        if (!response.ok) throw new Error(data.detail || "API request failed.");
+
+        if (data.status === "insufficient_evidence") {
+          responseCard.classList.remove("visible");
+          setStatus("There isn't enough supporting evidence to provide a reliable answer. Add the error code, application, environment, or recent changes and try again.", "warning");
+          return;
+        }
+
+        const answer = data.answer || {};
+        const incident = data.incident || {};
+        document.getElementById("incident").textContent = displayText(incident);
+        document.getElementById("likelyCause").textContent = displayText(answer.likely_cause);
+        const confidence = document.getElementById("confidence");
+        confidence.replaceChildren();
+        const confidencePill = document.createElement("span");
+        confidencePill.className = "confidence-value";
+        confidencePill.textContent = displayText(answer.confidence);
+        confidence.appendChild(confidencePill);
+        showList("evidence", answer.evidence);
+        showList("investigation", answer.investigation_steps);
+        showList("resolution", answer.recommended_resolution);
+        showList("warnings", answer.warnings, true);
+        document.getElementById("incidentDetails").textContent = JSON.stringify(incident, null, 2);
+        latestResponseText = getAnswerText(data);
+        responseCard.classList.add("visible");
+        setStatus("Analysis completed. Review the evidence and validate recommended actions before making changes.", "success");
+        responseCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        setStatus("Unable to analyze incident: " + (error.message || "Unexpected error."), "error");
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg> Analyze incident';
+      }
+    }
+
+    async function copyResponse() {
+      if (!latestResponseText) {
+        setStatus("Analyze an incident first to copy its results.", "warning");
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(latestResponseText);
+        setStatus("Incident analysis copied to clipboard.", "success");
+      } catch {
+        setStatus("Clipboard access was blocked by the browser. You can select and copy the result text manually.", "warning");
+      }
+    }
+
+    function clearConversation() {
+      localStorage.removeItem(SESSION_KEY);
+      document.getElementById("incidentInput").value = "";
+      document.getElementById("charCount").textContent = "0 / 10000";
+      document.getElementById("responseCard").classList.remove("visible");
+      latestResponseText = "";
+      setStatus("A new local conversation session has been started.", "success");
+      document.getElementById("incidentInput").focus();
+    }
+
+
+    function firstValue(object, keys, fallback = "") {
+      for (const key of keys) {
+        const value = object && object[key];
+        if (value !== undefined && value !== null && value !== "") return value;
+      }
+      return fallback;
+    }
+
+    function formatHistoryDate(value) {
+      if (!value) return "Date not available";
+      const date = new Date(value);
+      return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString();
+    }
+
+    async function loadRecentIncidents() {
+      const list = document.getElementById("historyList");
+      list.replaceChildren();
+      const loading = document.createElement("div");
+      loading.className = "history-empty";
+      loading.textContent = "Loading recent incidents…";
+      list.appendChild(loading);
+      try {
+        const response = await fetch("/history", { headers: { "Accept": "application/json" } });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "Could not load incident history.");
+        const incidents = Array.isArray(data) ? data : (Array.isArray(data.incidents) ? data.incidents : []);
+        list.replaceChildren();
+        if (!incidents.length) {
+          const empty = document.createElement("div");
+          empty.className = "history-empty";
+          empty.textContent = "No saved incidents yet. Resolve an incident and it will appear here.";
+          list.appendChild(empty);
+          return;
+        }
+        incidents.slice().reverse().slice(0, 8).forEach(record => {
+          const id = firstValue(record, ["incident_id", "id"], "—");
+          const query = firstValue(record, ["query", "original_query", "user_query"], "Incident description not available");
+          const timestamp = firstValue(record, ["created_at", "timestamp", "saved_at", "created_on", "date"], "");
+          const answer = record.answer || {};
+          const confidence = firstValue(answer, ["confidence"], firstValue(record, ["confidence"], "Not recorded"));
+          const item = document.createElement("article");
+          item.className = "history-item";
+          const main = document.createElement("div");
+          main.className = "history-main";
+          const idLine = document.createElement("div");
+          idLine.className = "history-id";
+          idLine.textContent = "INCIDENT #" + id;
+          const queryLine = document.createElement("div");
+          queryLine.className = "history-query";
+          queryLine.textContent = String(query);
+          const meta = document.createElement("div");
+          meta.className = "history-meta";
+          meta.textContent = formatHistoryDate(timestamp) + " · Confidence: " + String(confidence);
+          main.append(idLine, queryLine, meta);
+          const view = document.createElement("button");
+          view.type = "button";
+          view.className = "history-view";
+          view.textContent = "View incident";
+          view.addEventListener("click", () => viewSavedIncident(id));
+          item.append(main, view);
+          list.appendChild(item);
+        });
+      } catch (error) {
+        list.replaceChildren();
+        const failed = document.createElement("div");
+        failed.className = "history-empty";
+        failed.textContent = "Unable to load recent incidents. Check that the API is running, then refresh.";
+        list.appendChild(failed);
+      }
+    }
+
+    async function viewSavedIncident(id) {
+      try {
+        const response = await fetch("/history/" + encodeURIComponent(id));
+        const record = await response.json();
+        if (!response.ok) throw new Error(record.detail || "Incident not found.");
+        const incident = record.incident || {};
+        const answer = record.answer || {};
+        document.getElementById("incident").textContent = displayText(incident);
+        document.getElementById("likelyCause").textContent = displayText(answer.likely_cause);
+        const confidence = document.getElementById("confidence");
+        confidence.replaceChildren();
+        const pill = document.createElement("span");
+        pill.className = "confidence-value";
+        pill.textContent = displayText(answer.confidence || record.confidence);
+        confidence.appendChild(pill);
+        showList("evidence", answer.evidence);
+        showList("investigation", answer.investigation_steps);
+        showList("resolution", answer.recommended_resolution);
+        showList("warnings", answer.warnings, true);
+        document.getElementById("incidentDetails").textContent = JSON.stringify(record, null, 2);
+        latestResponseText = getAnswerText({ incident, answer });
+        document.getElementById("responseCard").classList.add("visible");
+        setStatus("Loaded saved incident #" + id + ".", "success");
+        document.getElementById("responseCard").scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (error) {
+        setStatus("Unable to open saved incident: " + (error.message || "Unexpected error."), "error");
+      }
+    }
+
+    document.getElementById("incidentInput").addEventListener("input", event => {
+      document.getElementById("charCount").textContent = event.target.value.length + " / 10000";
+    });
+    document.getElementById("incidentInput").addEventListener("keydown", event => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") resolveIncident();
+    });
+    loadRecentIncidents();
+
+    document.querySelectorAll(".example-chip").forEach(button => {
+      button.addEventListener("click", () => {
+        const input = document.getElementById("incidentInput");
+        input.value = button.dataset.query || "";
+        document.getElementById("charCount").textContent = input.value.length + " / 10000";
+        input.focus();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+[
+    {
+    "id": "Q001",
+    "question": "How do I check whether the Oracle listener is running?",
+    "expected_sources": [
+        "oracle_listener.md"
+    ],
+    "expected_keywords": [
+        "lsnrctl status",
+        "listener"
+    ],
+    "expected_answer_points": [
+        "Check the Oracle listener status",
+        "Use lsnrctl status"
+    ],
+    "should_answer": true,
+    "category": "direct_lookup"
+    },
+    {
+    "id": "Q002",
+    "question": "What should I investigate when an application cannot connect to Oracle?",
+    "expected_sources": [
+        "oracle_connectivity.md",
+        "oracle_listener.md"
+    ],
+    "expected_keywords": [
+        "listener",
+        "port",
+        "firewall",
+        "connectivity"
+    ],
+    "expected_answer_points": [
+        "Check listener status",
+        "Verify the listener port",
+        "Check network connectivity",
+        "Check firewall configuration"
+    ],
+    "should_answer": true,
+    "category": "troubleshooting"
+    },
+    {
+    "id": "Q003",
+    "question": "What is the common Oracle listener port?",
+    "expected_sources": [
+        "oracle_listener.md",
+        "oracle_connectivity.md"
+    ],
+    "expected_keywords": [
+        "1521"
+    ],
+    "expected_answer_points": [
+        "The common Oracle listener port is 1521"
+    ],
+    "should_answer": true,
+    "category": "direct_lookup"
+    },
+    {
+    "id": "Q004",
+    "question": "What should I do when ORA-12541 occurs?",
+    "expected_sources": [
+        "oracle_listener.md"
+    ],
+    "expected_keywords": [
+        "ORA-12541",
+        "listener"
+    ],
+    "expected_answer_points": [
+        "Check whether the Oracle listener is running",
+        "Use lsnrctl status",
+        "Verify the listener port",
+        "Start the listener if it is stopped and restarting is approved"
+    ],
+    "should_answer": true,
+    "category": "error_code"
+    },
+    {
+        "id": "Q005",
+        "question": "How do I troubleshoot a Kubernetes CrashLoopBackOff?",
+        "expected_sources": [],
+        "expected_keywords": [],
+        "expected_answer_points": [],
+        "should_answer": false,
+        "category": "out_of_domain"
+    },
+    {
+        "id": "Q006",
+        "question": "The application cannot reach the database server. What should I check first?",
+        "expected_sources": ["oracle_connectivity.md"],
+        "expected_keywords": [
+            "network",
+            "hostname",
+            "connectivity"
+        ],
+        "should_answer": true,
+        "category": "troubleshooting"
+    },
+    {
+        "id": "Q007",
+        "question": "How can I verify that port 1521 is available?",
+        "expected_sources": [
+            "oracle_listener.md",
+            "oracle_connectivity.md"
+        ],
+        "expected_keywords": ["1521", "port"],
+        "should_answer": true,
+        "category": "network"
+    },
+    {
+        "id": "Q008",
+        "question": "What should I check if the database host is reachable but the application still cannot connect?",
+        "expected_sources": ["oracle_connectivity.md"],
+        "expected_keywords": [
+            "listener",
+            "configuration",
+            "credentials"
+        ],
+        "should_answer": true,
+        "category": "troubleshooting"
+    },
+    {
+        "id": "Q009",
+        "question": "When is it appropriate to restart the Oracle listener?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": [
+            "listener",
+            "restart"
+        ],
+        "should_answer": true,
+        "category": "resolution"
+    },
+    {
+        "id": "Q010",
+        "question": "What command starts the Oracle listener?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": ["lsnrctl start"],
+        "should_answer": true,
+        "category": "command"
+    },
+    {
+        "id": "Q011",
+        "question": "Why might a firewall cause an Oracle connection problem?",
+        "expected_sources": [
+            "oracle_listener.md",
+            "oracle_connectivity.md"
+        ],
+        "expected_keywords": ["firewall"],
+        "should_answer": true,
+        "category": "network"
+    },
+    {
+        "id": "Q012",
+        "question": "What should be verified after starting the Oracle listener?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": [
+            "lsnrctl status"
+        ],
+        "should_answer": true,
+        "category": "resolution"
+    },
+    {
+        "id": "Q013",
+        "question": "Can you explain Oracle listener troubleshooting?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": [
+            "listener",
+            "investigation"
+        ],
+        "should_answer": true,
+        "category": "general"
+    },
+    {
+        "id": "Q014",
+        "question": "What are the common causes of Oracle connectivity failures?",
+        "expected_sources": ["oracle_connectivity.md"],
+        "expected_keywords": [
+            "listener",
+            "network",
+            "firewall",
+            "configuration"
+        ],
+        "should_answer": true,
+        "category": "general"
+    },
+    {
+        "id": "Q015",
+        "question": "The database listener is running, but the application cannot connect. What should I investigate next?",
+        "expected_sources": ["oracle_connectivity.md"],
+        "expected_keywords": [
+            "network",
+            "firewall",
+            "configuration"
+        ],
+        "should_answer": true,
+        "category": "multi_step"
+    },
+    {
+        "id": "Q016",
+        "question": "What should I do if the database hostname is incorrect?",
+        "expected_sources": ["oracle_connectivity.md"],
+        "expected_keywords": [
+            "hostname"
+        ],
+        "should_answer": true,
+        "category": "configuration"
+    },
+    {
+        "id": "Q017",
+        "question": "How do I troubleshoot a Redis connection timeout?",
+        "expected_sources": [],
+        "expected_keywords": [],
+        "should_answer": false,
+        "category": "out_of_domain"
+    },
+    {
+        "id": "Q018",
+        "question": "How can I deploy a machine learning model to Kubernetes?",
+        "expected_sources": [],
+        "expected_keywords": [],
+        "should_answer": false,
+        "category": "out_of_domain"
+    },
+    {
+        "id": "Q019",
+        "question": "The Oracle listener is stopped. What should I do?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": [
+            "lsnrctl start",
+            "listener"
+        ],
+        "should_answer": true,
+        "category": "resolution"
+    },
+    {
+        "id": "Q020",
+        "question": "What production precautions should be considered before restarting the listener?",
+        "expected_sources": ["oracle_listener.md"],
+        "expected_keywords": [
+            "change-management",
+            "approval",
+            "production"
+        ],
+        "should_answer": true,
+        "category": "safety"
+    }
+]

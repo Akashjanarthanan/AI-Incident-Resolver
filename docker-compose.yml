@@ -1,0 +1,28 @@
+services:
+  ai-incident-resolver:
+    build: .
+    container_name: ai-incident-resolver
+
+    ports:
+      - "127.0.0.1:8000:8000"
+
+    env_file:
+      - .env
+
+    environment:
+      OLLAMA_HOST: "http://host.docker.internal:11434"
+      HF_HOME: "/root/.cache/huggingface"
+
+    volumes:
+      - ./data:/workspace/data
+      - ./vector_store:/workspace/vector_store
+      - ./logs:/workspace/logs
+      - hf_cache:/root/.cache/huggingface
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    restart: unless-stopped
+
+volumes:
+  hf_cache:

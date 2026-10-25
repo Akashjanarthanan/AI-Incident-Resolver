@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.git/
+logs/
+*.log
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+data/incidents/incident_history.json

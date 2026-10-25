@@ -1,0 +1,44 @@
+{
+    "oracle_listener.md": {
+        "category": "database",
+        "technology": "oracle",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "oracle_connectivity.md": {
+        "category": "database",
+        "technology": "oracle",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "network_firewall.md": {
+        "category": "network",
+        "technology": "network",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "network_dns.md": {
+        "category": "network",
+        "technology": "dns",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "deployment_failure.md": {
+        "category": "deployment",
+        "technology": "application",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "application_timeout.md": {
+        "category": "application",
+        "technology": "application",
+        "document_type": "troubleshooting",
+        "environment": "general"
+    },
+    "api_500_error.md": {
+    "category": "application",
+    "technology": "api",
+    "document_type": "troubleshooting",
+    "environment": "general"
+    }
+}
